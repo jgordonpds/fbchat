@@ -110,6 +110,7 @@ def session_factory() -> requests.Session:
 
 
 def login_cookies(at: datetime.datetime):
+    session = session_factory()
     return session.cookies
 
 
