@@ -310,7 +310,7 @@ class Session:
         session = session_factory()
 
         # Get the content of HTML of mobile Login Facebook page
-        url_home = "https://m.facebook.com/"
+        url_home = "https://www.messenger.com/"
         soup = make_request(url_home)
         if soup is None:
             raise Exception("Couldn't load the Login Page")
@@ -318,30 +318,28 @@ class Session:
         # Here we need to extract this tokens from the Login Page
         lsd = soup.find("input", {"name": "lsd"}).get("value")
         jazoest = soup.find("input", {"name": "jazoest"}).get("value")
+        lgndim = soup.find("input", {"name": "lgndim"}).get("value")
+        lgnrnd = soup.find("input", {"name": "lgnrnd"}).get("value")
+        initial_request_id = soup.find("input", {"name": "initial_request_id"}).get("value")
+        timezone = soup.find("input", {"name": "timezone"}).get("value")
         m_ts = soup.find("input", {"name": "m_ts"}).get("value")
         li = soup.find("input", {"name": "li"}).get("value")
         try_number = soup.find("input", {"name": "try_number"}).get("value")
         unrecognized_tries = soup.find("input", {"name": "unrecognized_tries"}).get("value")
 
         data = {
-            "lsd": lsd,
             "jazoest": jazoest,
-            "m_ts": m_ts,
-            "li": li,
-            "try_number": try_number,
-            "unrecognized_tries": unrecognized_tries,
+            "lsd": lsd,
+            "initial_request_id": initial_request_id,  # any, just has to be present
+            "timezone": timezone,
+            "lgndim" : lgndim,
+            "lgnrnd" : lgnrnd,
+            "lgnjs":"n",
             "email": email,
             "pass": password,
-            "login": "Iniciar sesión",
-            "prefill_contact_point": "",
-            "prefill_source": "",
-            "prefill_type": "",
-            "first_prefill_source": "",
-            "first_prefill_type": "",
-            "had_cp_prefilled": "false",
-            "had_password_prefilled": "false",
-            "is_smart_lock": "false",
-            "_fb_noscript": "true"
+            "login": "1",
+            "persistent": "1",  # Changes the cookie type to have a long "expires"
+            "default_persistent": "0"
         }
 
         try:
