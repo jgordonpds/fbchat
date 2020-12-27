@@ -322,10 +322,6 @@ class Session:
         lgnrnd = soup.find("input", {"name": "lgnrnd"}).get("value")
         initial_request_id = soup.find("input", {"name": "initial_request_id"}).get("value")
         timezone = soup.find("input", {"name": "timezone"}).get("value")
-        m_ts = soup.find("input", {"name": "m_ts"}).get("value")
-        li = soup.find("input", {"name": "li"}).get("value")
-        try_number = soup.find("input", {"name": "try_number"}).get("value")
-        unrecognized_tries = soup.find("input", {"name": "unrecognized_tries"}).get("value")
 
         data = {
             "jazoest": jazoest,
