@@ -110,7 +110,7 @@ def session_factory() -> requests.Session:
 
 
 def login_cookies(at: datetime.datetime):
-    return {"act": "{}/0".format(_util.datetime_to_millis(at))}
+    return session.cookies
 
 
 def client_id_factory() -> str:
