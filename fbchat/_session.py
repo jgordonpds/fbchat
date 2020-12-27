@@ -132,7 +132,8 @@ def make_request(url, method='GET', data=None, is_soup=True):
         raise Exception(f'Error [{resp.status_code}] > {url}')
 
     if is_soup:
-        return bs4.BeautifulSoup(resp.text, 'lxml')
+        html = resp.content.decode("utf-8")
+        return bs4.BeautifulSoup(html, "html.parser", parse_only=bs4.SoupStrainer("form"))
     return resp
 
 def find_form_request(html: str):
