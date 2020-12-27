@@ -499,7 +499,10 @@ class Session:
     def _post(self, url, data, files=None, as_graphql=False):
         data.update(self._get_params())
         try:
-            r = self._session.post(prefix_url(url), data=data, files=files)
+            headers = {  # This is the important part: Nokia C3 User Agent
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
+            }
+            r = self._session.post(prefix_url(url), data=data, files=files, headers=headers)
         except requests.RequestException as e:
             _exception.handle_requests_error(e)
         # Facebook's encoding is always UTF-8
