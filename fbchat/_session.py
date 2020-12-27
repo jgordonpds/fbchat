@@ -103,7 +103,7 @@ def session_factory() -> requests.Session:
     # We won't try to set a fake user agent to mask our presence!
     # Facebook allows us access anyhow, and it makes our motives clearer:
     # We're not trying to cheat Facebook, we simply want to access their service
-    session.headers["User-Agent"] = "fbchat/{}".format(__version__)
+    session.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
     return session
 
 
