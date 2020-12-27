@@ -115,14 +115,16 @@ def client_id_factory() -> str:
     return hex(int(random.random() * 2 ** 31))[2:]
 
 # Utility function to make the requests and convert to soup object if necessary
-def make_request(self, url, method='GET', data=None, is_soup=True):
+def make_request(url, method='GET', data=None, is_soup=True):
     if len(url) == 0:
         raise Exception(f'Empty Url')
 
+    session = session_factory()
+
     if method == 'GET':
-        resp = self.session.get(url, headers=self.headers)
+        resp = session.get(url)
     elif method == 'POST':
-        resp = self.session.post(url, headers=self.headers, data=data)
+        resp = session.post(url, data=data)
     else:
         raise Exception(f'Method [{method}] Not Supported')
 
@@ -308,7 +310,7 @@ class Session:
 
         # Get the content of HTML of mobile Login Facebook page
         url_home = "https://m.facebook.com/"
-        soup = self.make_request(url_home)
+        soup = make_request(url_home)
         if soup is None:
             raise Exception("Couldn't load the Login Page")
 
